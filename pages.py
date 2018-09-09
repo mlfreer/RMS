@@ -11,7 +11,8 @@ class Welcome(Page):
 		return self.round_number == 1
 	def vars_for_template(self):
 		return { 
-		'prob' : Constants.delta*100
+		'prob' : Constants.delta*100,
+		'rounds': Constants.num_rounds
 		}
 
 #class necessary to determine whether you are rematched
@@ -53,7 +54,6 @@ class ResultsWaitPage(WaitPage):
 	def after_all_players_arrive(self):
 		for p in self.group.get_players():
 			p.set_payoff_in_round()
-		# defining the match number for the next round !!! 
 
 
 class Results(Page):
@@ -66,13 +66,16 @@ class Results(Page):
 			'same_choice': me.action == opponent.action,
 		}
 
-class FinalResultsWaitPage(WaitPage):
-	def is_displayed(self):
-		return self.round_number == Constants.num_rounds
 
 class FinalResults(Page):
 	def is_displayed(self):
 		return self.round_number == Constants.num_rounds
+
+	def vars_for_template(self):
+		me = self.player
+		return {
+			'payoff': me.total_payoff*.004+5,
+		}
 
 
 page_sequence = [
@@ -81,7 +84,6 @@ page_sequence = [
 	Decision,
 	ResultsWaitPage,
 	Results,
-	FinalResultsWaitPage,
 	FinalResults
 
 ]

@@ -5,6 +5,8 @@ from otree.api import (
 
 # to import the randomizer
 import random
+# to use decimals
+import decimal
 
 
 
@@ -43,6 +45,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 	action = models.BooleanField() # action taken in the current round
 	payoff_in_round = models.IntegerField(initial=0) #payoff received in the current round
+	total_payoff = models.IntegerField(initial=0) #total payoff in the entire game
 
 
 	#getting current partner
@@ -68,4 +71,16 @@ class Player(BasePlayer):
 		}
 
 		self.payoff_in_round = payoff_matrix[self.action][self.other_player().action]
+		if self.subsession.round_number>1:
+			self.total_payoff = self.in_round(self.subsession.round_number-1).total_payoff+self.payoff_in_round 
+		else:
+			self.total_payoff = self.payoff_in_round
+
+		self.participant.payoff=c(5+self.total_payoff*.004)
+
+
+
+
+
+
 
