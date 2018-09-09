@@ -2,12 +2,29 @@
 {% load otree static %}
 
 {% block title %}
-    Page title
+    Results
 {% endblock %}
 
 {% block content %}
 
+    <p>
+       
+            You chose	 	{% if  my_decision %} A 
+            				{% else %} B
+            				{% endif %}
+            and the other participant chose 
+            				{% if opponent_decision %} A
+            				{% else %} B
+            				{% endif %}
+    </p>
+
+    <p>
+        As a result, you earned {{ player.payoff_in_round }}.
+    </p>
+
     {% next_button %}
+
+
 {% endblock %}
 
 

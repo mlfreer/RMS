@@ -1,0 +1,63 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Take a Decision
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+
+    <style>
+        .highlight-row-on-hover:hover td {
+            background-color: #fcf8e3;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+
+Random number {{player.subsession.random_number }}
+<br>
+<br>
+
+{% if continue %}
+You 
+{% if rematched %}
+were rematched to the new player
+{% else  %}
+continue with the same player as in the previous round
+{% endif %}
+{% endif %}
+<br>
+<br> 
+
+    <div class="form-group required">
+        <table class="table table-bordered text-center" style="width: auto; margin: auto">
+            <tr>
+                <th colspan="2" rowspan="2"></th>
+                <th colspan="2"> Other's Choice</th>
+            </tr>
+            <tr>
+                <th>A</th>
+                <th>B</th>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th rowspan="2"><span class="rotate90">You</span></th>
+                <td><button name="action" value="True" class="btn btn-primary btn-large">I will choose A</button></td>
+                <td>{{Constants.CC_payoff}}, {{Constants.CC_payoff}}</td>
+                <td>{{ Constants.CD_payoff }}, {{Constants.DC_payoff}}</td>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <td><button name="action" value="False" class="btn btn-primary btn-large">I will choose B</button></td>
+                <td>{{Constants.DC_payoff}}, {{ Constants.CD_payoff }}</td>
+                <td>{{Constants.DD_payoff}}, {{Constants.DD_payoff}}</td>
+            </tr>
+        </table>
+    </div>
+
+
+{% endblock %}

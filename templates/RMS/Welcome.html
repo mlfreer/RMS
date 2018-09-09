@@ -1,0 +1,149 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+
+    <style>
+        .highlight-row-on-hover:hover td {
+            background-color: #fcf8e3;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+<h3 align="center">
+INSTRUCTIONS
+</h3>
+<font size="4">
+
+
+Thank you for participating in today’s experiment. Please remain silent during the experiment. If you have any questions, please raise your hand and the experimenter will assist you in private.
+
+<br>
+<br>
+
+This is an experiment in decision making. Your earnings from the experiment will depend in part on your decisions, in part on the decisions of other subjects and on chance. Your earnings will not depend on the decisions of other participants. Please pay careful attention to the instructions as a considerable amount of money is at stake. 
+
+<br>
+<br>
+
+<b> Thanks for showing up</b><br>
+Just for being willing to participate, you will automatically earn $5. Whatever you earn in the rest of the session will be in addition to this $5.
+
+<br>
+<br>
+
+<b>Your Identity</b> <br>
+You will never be asked to reveal your identity to anyone during the course of the experiment. Your name will never be recorded. Neither the experimenters nor anyone else in the room will be able to link you to any of your decisions. In order to keep your decisions private, please do not reveal your choices to any other participant.
+
+<br>
+<br>
+
+<h4 align="center">
+This Experiment
+</h4>
+
+In this experiment you will be asked to make decisions in several rounds. You will be randomly paired with another person for a sequence of rounds. Each sequence of rounds is referred to as a match.
+
+<br>
+<br>
+
+The length of a match is randomly determined. After each round, there is {{ prob }}% probability that the match will continue for at least another round. This is as if we would flip a coin after each round and continue if tails and end if heads. So, for instance, if you are in round 2, the probability there will be a third round is {{ prob }}% and if you are in round 9, the probability there will be another round is also {{ prob }}%. 
+
+<br>
+<br>
+
+Once a match ends, you will be randomly paired with another person for a new match. You will play 20 matches in total.
+
+<br>
+<br>
+
+The choices and the payoffs in each round are as follows: 
+
+<br>
+<br> 
+
+    <div class="form-group required">
+        <table class="table table-bordered text-center" style="width: auto; margin: auto">
+            <tr>
+                <th colspan="2" rowspan="2"></th>
+                <th colspan="2"> Other's Choice</th>
+            </tr>
+            <tr>
+                <th>A</th>
+                <th>B</th>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th rowspan="2"><span class="rotate90">You </span></th>
+                <th> A </th>
+                <td>{{Constants.CC_payoff}}, {{Constants.CC_payoff}}</td>
+                <td>{{ Constants.CD_payoff }}, {{Constants.DC_payoff}}</td>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th> B </th>
+                <td>{{Constants.DC_payoff}}, {{ Constants.CD_payoff }}</td>
+                <td>{{Constants.DD_payoff}}, {{Constants.DD_payoff}}</td>
+            </tr>
+        </table>
+    </div>
+
+<br>
+<br> 
+
+
+
+<b>That is, if:</b>
+<br>
+You select A and the other selects A, you each make {{Constants.CC_payoff}}. <br>
+You select A and the other selects B, you make {{Constants.CD_payoff}} while the other makes {{Constants.DC_payoff}}.  <br>
+You select B and the other selects A, you make {{Constants.DC_payoff}} while the other makes {{Constants.CD_payoff}}. <br> 
+You select B and the other selects B, you each make {{Constants.DD_payoff}}. <br> 
+
+<br>
+<br>
+
+<b>Payment</b>
+<br>
+
+At the end of experiment one out of 20 matches will be randomly (with equal chance) picked. 
+You will be paid $0.1 (ten cents) for every token earned in the match picked. 
+<br>
+<br>
+
+<b>Summary</b>
+
+<ul>
+<li>	
+	The length of a match is randomly determined. After each round, there is {{prob}}% probability that the match will continue for at least another round. You will play with the same person for the entire match.
+</li>
+
+<li>	
+	After a match is finished, you will be randomly paired with another person for a new match.
+</li>
+
+<li>Your final payment is equal to the entire number of tokens earned in a randomly picked match (1 token = 10 cents) during the experiment and the show up fee of $5.
+</li>
+
+</ul>
+
+
+<br>
+<br>
+
+Are there any questions? 
+
+<br>
+<br>
+
+
+<h4 align="center">
+Thank You and Good Luck!
+</h4>
+ 
+
+
+{% endblock %}
