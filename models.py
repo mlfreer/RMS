@@ -21,7 +21,7 @@ Experiment for 2 person infinitely repeated prisoners dilemma.
 class Constants(BaseConstants):
 	name_in_url = '2PPD'
 	players_per_group = 2
-	num_rounds = 10 # the total is 160 periods with random rematching at \delta = .8 (!!!) 
+	num_rounds = 2 # the total is 160 periods with random rematching at \delta = .8 (!!!) 
 	# set to 10 in the test mode, move to 160 in the real mode!
 
 	delta = .8 # continuation probability (in the same matching)
@@ -76,7 +76,7 @@ class Player(BasePlayer):
 		else:
 			self.total_payoff = self.payoff_in_round
 
-		self.participant.payoff=c(5+self.total_payoff*.004)
+		self.participant.payoff=c(5+round(4*self.total_payoff*.004)/4)
 
 
 

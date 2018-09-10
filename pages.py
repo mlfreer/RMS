@@ -71,12 +71,6 @@ class FinalResults(Page):
 	def is_displayed(self):
 		return self.round_number == Constants.num_rounds
 
-	def vars_for_template(self):
-		me = self.player
-		return {
-			'payoff': me.total_payoff*.004+5,
-		}
-
 
 page_sequence = [
 	Welcome,
