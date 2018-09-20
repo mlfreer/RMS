@@ -1,0 +1,48 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+    
+       <td>
+        <h5>
+            You chose	 	{% if  my_decision %}  <font color="blue"> A </font>
+            				{% else %}  <font color="blue"> B</font>
+            				{% endif %}
+            and the other participant chose 
+            				{% if opponent_decision %} <font color="blue"> A</font>
+            				{% else %}  <font color="blue"> B</font>
+            				{% endif %}
+        </h5>
+        </td>
+        <td>
+        </td>
+    
+
+</tr>
+<tr>
+    <td>
+    <h5>
+        As a result, you earned  <font color="blue"> {{ player.payoff_in_round }}</font>.
+    </h5>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+    <td>
+    </td>
+<td>
+    {% next_button %}
+</td>
+</tr>
+</table>
+
+{% endblock %}
+
+
