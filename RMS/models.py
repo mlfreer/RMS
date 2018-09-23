@@ -7,6 +7,8 @@ from otree.api import (
 import random
 # to use decimals
 import decimal
+# to round up
+from math import ceil
 
 
 
@@ -76,7 +78,7 @@ class Player(BasePlayer):
 		else:
 			self.total_payoff = self.payoff_in_round
 
-		self.participant.payoff=c(5+round(4*self.total_payoff*.004)/4)
+		self.participant.payoff=c(5+ceil(4*self.total_payoff*.004)/4)
 
 
 

@@ -1,4 +1,4 @@
-{% extends "global/Page.html" %}
+{% extends "RMS/Page.html" %}
 {% load otree static %}
 
 {% block title %}
@@ -42,25 +42,24 @@ continue with the <font color="blue"> same player </font> as in the previous rou
         <table class="table table-bordered text-center" style="width: auto; margin: auto">
             <tr>
                 <th colspan="2" rowspan="2"></th>
-                <th colspan="2"> Other's Choice</th>
+                <th colspan="2"> <span class="other_payoff">Other's Choice</span></th>
             </tr>
             <tr>
                 <th>A</th>
                 <th>B</th>
             </tr>
             <tr class="highlight-row-on-hover">
-                <th rowspan="2"><span class="rotate90">You</span></th>
+                <th rowspan="2"><span class="rotate90 own_payoff">You</span></th>
                 <td><button name="action" value="True" class="btn btn-primary btn-large">I will choose A</button></td>
-                <td>{{Constants.CC_payoff}}, {{Constants.CC_payoff}}</td>
-                <td>{{ Constants.CD_payoff }}, {{Constants.DC_payoff}}</td>
+                <td><span class="own_payoff">{{Constants.CC_payoff}}</span>, <span class="other_payoff">{{Constants.CC_payoff}}</span></td>
+                <td><span class="own_payoff">{{ Constants.CD_payoff }}</span>, <span class="other_payoff">{{Constants.DC_payoff}}</span></td>
             </tr>
             <tr class="highlight-row-on-hover">
                 <td><button name="action" value="False" class="btn btn-primary btn-large">I will choose B</button></td>
-                <td>{{Constants.DC_payoff}}, {{ Constants.CD_payoff }}</td>
-                <td>{{Constants.DD_payoff}}, {{Constants.DD_payoff}}</td>
+                <td><span class="own_payoff">{{Constants.DC_payoff}}</span>, <span class="other_payoff">{{ Constants.CD_payoff }}</span></td>
+                <td><span class="own_payoff">{{Constants.DD_payoff}}</span>, <span class="other_payoff">{{Constants.DD_payoff}}</span></td>
             </tr>
         </table>
     </div>
-
 
 {% endblock %}

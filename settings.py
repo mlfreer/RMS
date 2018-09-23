@@ -21,7 +21,7 @@ ADMIN_USERNAME = 'ICES'
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 # don't share this with anybody.
-SECRET_KEY = 'st-ueln282mhvg9k108jo45$=v!6!sf@8(c^!$%m-pj6a0!0=7'
+SECRET_KEY = environ.get('OTREE_SECRET_KEY')
 
 DATABASES = {
     'default': dj_database_url.config(

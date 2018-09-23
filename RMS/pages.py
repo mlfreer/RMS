@@ -45,7 +45,8 @@ class Decision(Page):
 		me = self.player
 		return {
 			'rematched': me.subsession.rematched,
-			'continue': me.subsession.round_number>1
+			'continue': me.subsession.round_number>1,
+			'round_number': me.subsession.round_number
 		}
 
 
