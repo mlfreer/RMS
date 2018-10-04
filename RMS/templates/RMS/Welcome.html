@@ -29,7 +29,7 @@ Thank you for participating in today’s experiment. Please remain silent during
 <br>
 <br>
 
-This is an experiment in decision making. Your earnings from the experiment will depend in part on your decisions, in part on the decisions of other subjects and on chance. Your earnings will not depend on the decisions of other participants. Please pay careful attention to the instructions as a considerable amount of money is at stake. 
+This is an experiment in decision making. Your earnings from the experiment will depend in part on your decisions, in part on the decisions of other subjects and on chance. Please pay careful attention to the instructions as a considerable amount of money is at stake.
 
 <br>
 <br>
@@ -83,13 +83,13 @@ Your choices will earn you tokens. The choices and the payoffs in tokens in each
             <tr class="highlight-row-on-hover">
                 <th rowspan="2"><span class="rotate90 own_payoff">You </span></th>
                 <th> A </th>
-                <td><span class="own_payoff">{{Constants.CC_payoff}}</span>, <span class="other_payoff">{{Constants.CC_payoff}}</span></td>
-                <td><span class="own_payoff">{{ Constants.CD_payoff }}</span>, <span class="other_payoff">{{Constants.DC_payoff}}</span></td>
+                <td><span class="own_payoff">{{CC_payoff}}</span>, <span class="other_payoff">{{CC_payoff}}</span></td>
+                <td><span class="own_payoff">{{CD_payoff }}</span>, <span class="other_payoff">{{DC_payoff}}</span></td>
             </tr>
             <tr class="highlight-row-on-hover">
                 <th> B </th>
-                <td><span class="own_payoff">{{Constants.DC_payoff}}</span>, <span class="other_payoff">{{ Constants.CD_payoff }}</span></td>
-                <td><span class="own_payoff">{{Constants.DD_payoff}}</span>, <span class="other_payoff">{{Constants.DD_payoff}}</span></td>
+                <td><span class="own_payoff">{{DC_payoff}}</span>, <span class="other_payoff">{{CD_payoff }}</span></td>
+                <td><span class="own_payoff">{{DD_payoff}}</span>, <span class="other_payoff">{{DD_payoff}}</span></td>
             </tr>
         </table>
     </div>
@@ -105,10 +105,10 @@ Your choices will earn you tokens. The choices and the payoffs in tokens in each
 
 <b>That is, if:</b>
 <br>
-You select A and the other selects A, you each make {{Constants.CC_payoff}}. <br>
-You select A and the other selects B, you make {{Constants.CD_payoff}} while the other makes {{Constants.DC_payoff}}.  <br>
-You select B and the other selects A, you make {{Constants.DC_payoff}} while the other makes {{Constants.CD_payoff}}. <br> 
-You select B and the other selects B, you each make {{Constants.DD_payoff}}. <br> 
+You select A and the other selects A, you each make {{CC_payoff}}. <br>
+You select A and the other selects B, you make {{CD_payoff}} while the other makes {{DC_payoff}}.  <br>
+You select B and the other selects A, you make {{DC_payoff}} while the other makes {{CD_payoff}}. <br>
+You select B and the other selects B, you each make {{DD_payoff}}. <br>
 
 <br>
 <br>
@@ -116,7 +116,7 @@ You select B and the other selects B, you each make {{Constants.DD_payoff}}. <br
 <b>Payment</b>
 <br>
 
-At the end of experiment your total earnings will be computed as the sum of the entire amount earned during the {{rounds}} rounds. You will be paid $0.004 for every token earned in the match picked.
+At the end of experiment your total earnings will be computed as the sum of the entire amount earned during the {{rounds}} rounds. You will be paid $0.004 for every token earned in every match.
 Your final payment will be automatically rounded up to the nearest quarter of the dollar.
 
 <br>

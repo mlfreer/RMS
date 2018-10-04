@@ -126,11 +126,30 @@ SESSION_CONFIGS = [
        'name': 'RMS_2PPD',
        'display_name': "RMS: 2-Person PD",
        'num_demo_participants': 4,
-       'app_sequence': ['RMS'],
+       'game_matrix': '2PPD',
+       'app_sequence': ['RMS']
    },
+   {
+       'name': 'RMS_2CG',
+       'display_name': "RMS: 2-Person Coordination Game",
+       'num_demo_participants': 4,
+       'game_matrix': '2PCG',
+       'app_sequence': ['RMS']
+   }
 ]
 # see the end of this file for the inactive session configs
+# ROOM Settings for lab experiments
 
+ROOM_DEFAULTS = {}
+
+ROOMS = [
+    {
+        'name': 'ICES_lab',
+        'display_name': 'ICES Experimental Economics Lab',
+        'use_secure_urls': True,
+        'participant_label_file': 'participants.txt'
+    }
+]
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans

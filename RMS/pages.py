@@ -12,7 +12,11 @@ class Welcome(Page):
 	def vars_for_template(self):
 		return { 
 		'prob' : Constants.delta*100,
-		'rounds': Constants.num_rounds
+		'rounds': Constants.num_rounds,
+		'CC_payoff': self.subsession.CC_payoff,
+		'DC_payoff': self.subsession.DC_payoff,
+		'CD_payoff': self.subsession.CD_payoff,
+		'DD_payoff': self.subsession.DD_payoff
 		}
 
 #class necessary to determine whether you are rematched
@@ -46,7 +50,11 @@ class Decision(Page):
 		return {
 			'rematched': me.subsession.rematched,
 			'continue': me.subsession.round_number>1,
-			'round_number': me.subsession.round_number
+			'round_number': me.subsession.round_number,
+			'CC_payoff': self.subsession.CC_payoff,
+			'DC_payoff': self.subsession.DC_payoff,
+			'CD_payoff': self.subsession.CD_payoff,
+			'DD_payoff': self.subsession.DD_payoff
 		}
 
 
