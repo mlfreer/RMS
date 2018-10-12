@@ -28,9 +28,9 @@
 {% if continue %}
 You 
 {% if rematched %}
-were rematched to the <font color="blue"> new player </font>
+were rematched to the <span class="other_payoff"> new player </span>
 {% else  %}
-continue with the <font color="blue"> same player </font> as in the previous round
+continue with the <span class="other_payoff"> same player </span> as in the previous round
 {% endif %}
 {% endif %}
 </h5>
@@ -49,7 +49,7 @@ continue with the <font color="blue"> same player </font> as in the previous rou
                 <th>B</th>
             </tr>
             <tr class="highlight-row-on-hover">
-                <th rowspan="2"><span class="rotate90 own_payoff">You</span></th>
+                <th class="rotate" rowspan="2" ><div class="own_payoff">Your Choice</div></th>
                 <td><button name="action" value="True" class="btn btn-primary btn-large">I will choose A</button></td>
                 <td><span class="own_payoff">{{CC_payoff}}</span>, <span class="other_payoff">{{CC_payoff}}</span></td>
                 <td><span class="own_payoff">{{CD_payoff }}</span>, <span class="other_payoff">{{DC_payoff}}</span></td>
@@ -61,5 +61,6 @@ continue with the <font color="blue"> same player </font> as in the previous rou
             </tr>
         </table>
     </div>
+
 
 {% endblock %}

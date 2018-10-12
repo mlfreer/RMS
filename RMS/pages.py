@@ -32,7 +32,7 @@ class ShuffleWaitPage(WaitPage):
 			self.subsession.random_number = r
 	# shuffling upon the rnadom number exceeding the continuation probability
 			if r> Constants.delta:
-				self.subsession.group_randomly() # shuffle groups
+				self.subsession.group_randomly(fixed_id_in_group=True) # shuffle groups
 				self.subsession.match_number = self.subsession.match_number+1 # increase the match number in the next period
 				self.subsession.rematched = True # indicate that players will be rematched
 

@@ -9,7 +9,8 @@ import random
 import decimal
 # to round up
 from math import ceil
-
+# to store lists in database
+from django.core.validators import int_list_validator
 
 
 author = 'Mikhail Freer'
@@ -23,7 +24,7 @@ Experiment for 2 person infinitely repeated prisoners dilemma.
 class Constants(BaseConstants):
 	name_in_url = '2PPD'
 	players_per_group = 2
-	num_rounds = 10 # the total is 160 periods with random rematching at \delta = .8 (!!!)
+	num_rounds = 160 # the total is 160 periods with random rematching at \delta = .8 (!!!)
 	# set to 10 in the test mode, move to 160 in the real mode!
 
 	delta = .8 # continuation probability (in the same matching)
