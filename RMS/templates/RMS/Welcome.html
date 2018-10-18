@@ -68,7 +68,7 @@ Your choices will earn you tokens. The choices and the payoffs in tokens in each
 
 <br>
 <br> 
-
+{% if subsession.treatment == '2PPD' %}
     <div class="form-group required">
         <table class="table table-bordered text-center" style="width: auto; margin: auto">
             <tr>
@@ -92,7 +92,31 @@ Your choices will earn you tokens. The choices and the payoffs in tokens in each
             </tr>
         </table>
     </div>
-
+{% else %}
+    <div class="form-group required">
+        <table class="table table-bordered text-center" style="width: auto; margin: auto">
+            <tr>
+                <th colspan="2" rowspan="2"></th>
+                <th colspan="2"><span class="other_payoff"> Other's Choice</span></th>
+            </tr>
+            <tr>
+                <th>A</th>
+                <th>B</th>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th class="rotate" rowspan="2" ><div class="own_payoff">Your Choice</div></th>
+                <th> A </th>
+                <td><span class="own_payoff">{{my_CC_payoff}}</span>, <span class="other_payoff">{{other_CC_payoff}}</span></td>
+                <td><span class="own_payoff">0</span>, <span class="other_payoff">0</span></td>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th> B </th>
+                <td><span class="own_payoff">0</span>, <span class="other_payoff">0</span></td>
+                <td><span class="own_payoff">{{my_DD_payoff}}</span>, <span class="other_payoff">{{other_DD_payoff}}</span></td>
+            </tr>
+        </table>
+    </div>
+{% endif %}
 <br>
 <br> 
 
@@ -104,10 +128,22 @@ Your choices will earn you tokens. The choices and the payoffs in tokens in each
 
 <b>That is, if:</b>
 <br>
+
+{% if subsession.treatment == '2PPD' %}
+
     You select <span class="own_payoff">A</span> and the other selects <span class="other_payoff">A</span>, you each make {{CC_payoff}}. <br>
 You select <span class="own_payoff">A</span> and the other selects <span class="other_payoff">B</span>, you make {{CD_payoff}} while the other makes {{DC_payoff}}.  <br>
 You select <span class="own_payoff">B</span> and the other selects <span class="other_payoff">A</span>, you make {{DC_payoff}} while the other makes {{CD_payoff}}. <br>
 You select <span class="own_payoff">B</span> and the other selects <span class="other_payoff">B</span>, you each make {{DD_payoff}}. <br>
+
+{% else %}
+
+    You select <span class="own_payoff">A</span> and the other selects <span class="other_payoff">A</span>, you make {{my_CC_payoff}} while the other makes {{other_CC_payoff}}. <br>
+You select <span class="own_payoff">A</span> and the other selects <span class="other_payoff">B</span>, you each make 0.  <br>
+You select <span class="own_payoff">B</span> and the other selects <span class="other_payoff">A</span>, you each make 0. <br>
+You select <span class="own_payoff">B</span> and the other selects <span class="other_payoff">B</span>, you make {{my_DD_payoff}} while the other makes {{other_DD_payoff}}. <br>
+
+{% endif %}
 
 <br>
 <br>

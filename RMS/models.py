@@ -27,8 +27,7 @@ class Constants(BaseConstants):
 	num_rounds = 160 # the total is 160 periods with random rematching at \delta = .8 (!!!)
 	# set to 10 in the test mode, move to 160 in the real mode!
 
-	delta = .8 # continuation probability (in the same matching)
-
+	delta = .4 # continuation probability (in the same matching)
 
 class Subsession(BaseSubsession):
 	match_number = models.IntegerField(initial=1) # counting the mathes (to compute the payoffs in the end)
@@ -38,16 +37,18 @@ class Subsession(BaseSubsession):
 	DD_payoff = models.IntegerField()
 	DC_payoff = models.IntegerField()
 	CD_payoff = models.IntegerField()
+	treatment = models.CharField()
 
 	def before_session_starts(self):
 		"""Initialize values at the start of the session"""
 		# defining game structure
+		self.treatment = self.session.config['game_matrix']
 		if self.session.config['game_matrix'] == '2PPD':
 			self.CC_payoff = 40  # payoff for each player if both cooperate
 			self.DD_payoff = 25  # payoff to the palyer if both defect
 			self.CD_payoff = 10  # payoff to (C,D) profile (to the player who cooperates)
 			self.DC_payoff = 60  # payoff to (D,C) profile (to the player who defects)
-		elif self.session.config['game_matrix'] == '2PCG':
+		else: #if self.session.config['game_matrix'] == '2PCG':
 			self.CC_payoff = 100  # payoff for each player if both cooperate
 			self.DD_payoff = 60  # payoff to the palyer if both defect
 			self.CD_payoff = 0  # payoff to (C,D) profile (to the player who cooperates)
@@ -84,8 +85,12 @@ class Player(BasePlayer):
 					0: self.subsession.DD_payoff
 				}
 		}
+		if self.session.config['game_matrix'] == '2PPD':
+			self.payoff_in_round = payoff_matrix[self.action][self.other_player().action]
+		elif self.session.config['game_matrix'] == '2PCG':
+			if (self.id_in_group==1 and self.action==1) or (self.id_in_group==2 and self.action==0):
+				self.payoff_in_round = payoff_matrix[self.action][self.other_player().action]
 
-		self.payoff_in_round = payoff_matrix[self.action][self.other_player().action]
 		if self.subsession.round_number>1:
 			self.total_payoff = self.in_round(self.subsession.round_number-1).total_payoff+self.payoff_in_round 
 		else:

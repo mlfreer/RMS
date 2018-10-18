@@ -2,7 +2,7 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
-import random 
+import random
 
 
 
@@ -10,14 +10,25 @@ class Welcome(Page):
 	def is_displayed(self):
 		return self.round_number == 1
 	def vars_for_template(self):
-		return { 
-		'prob' : Constants.delta*100,
-		'rounds': Constants.num_rounds,
-		'CC_payoff': self.subsession.CC_payoff,
-		'DC_payoff': self.subsession.DC_payoff,
-		'CD_payoff': self.subsession.CD_payoff,
-		'DD_payoff': self.subsession.DD_payoff
-		}
+		me = self.player
+		if self.subsession.treatment=="2PPG":
+			return {
+				'prob' : Constants.delta*100,
+				'rounds': Constants.num_rounds,
+				'CC_payoff': self.subsession.CC_payoff,
+				'DC_payoff': self.subsession.DC_payoff,
+				'CD_payoff': self.subsession.CD_payoff,
+				'DD_payoff': self.subsession.DD_payoff
+			}
+		else:
+			return {
+				'prob' : Constants.delta*100,
+				'rounds': Constants.num_rounds,
+				'my_CC_payoff': self.subsession.CC_payoff if me.id_in_group==1 else 0,
+				'other_CC_payoff': self.subsession.CC_payoff if me.id_in_group==2 else 0,
+				'my_DD_payoff': self.subsession.DD_payoff if me.id_in_group==2 else 0,
+				'other_DD_payoff': self.subsession.DD_payoff if me.id_in_group==1 else 0
+			}
 
 #class necessary to determine whether you are rematched
 class ShuffleWaitPage(WaitPage):
@@ -32,7 +43,20 @@ class ShuffleWaitPage(WaitPage):
 			self.subsession.random_number = r
 	# shuffling upon the rnadom number exceeding the continuation probability
 			if r> Constants.delta:
-				self.subsession.group_randomly(fixed_id_in_group=True) # shuffle groups
+				#self.subsession.group_randomly() # shuffle groups
+
+				matrix = self.subsession.get_group_matrix()
+				print(matrix)
+				trans_matrix = list(map(list, zip(*matrix)))
+				for idx,row in enumerate(trans_matrix):
+					# we mutate in place since shuffle randomizes in place and returns none
+					random.shuffle(trans_matrix[idx])
+				matrix=list(map(list, zip(*trans_matrix)))
+				print(matrix)
+				self.subsession.set_group_matrix(matrix)
+
+
+
 				self.subsession.match_number = self.subsession.match_number+1 # increase the match number in the next period
 				self.subsession.rematched = True # indicate that players will be rematched
 
@@ -47,15 +71,27 @@ class Decision(Page):
 
 	def vars_for_template(self):
 		me = self.player
-		return {
-			'rematched': me.subsession.rematched,
-			'continue': me.subsession.round_number>1,
-			'round_number': me.subsession.round_number,
-			'CC_payoff': self.subsession.CC_payoff,
-			'DC_payoff': self.subsession.DC_payoff,
-			'CD_payoff': self.subsession.CD_payoff,
-			'DD_payoff': self.subsession.DD_payoff
-		}
+		if self.subsession.treatment=="2PPD":
+			return {
+				'rematched': me.subsession.rematched,
+				'continue': me.subsession.round_number>1,
+				'round_number': me.subsession.round_number,
+				'CC_payoff': self.subsession.CC_payoff,
+				'DC_payoff': self.subsession.DC_payoff,
+				'CD_payoff': self.subsession.CD_payoff,
+				'DD_payoff': self.subsession.DD_payoff
+			}
+		else:
+			return {
+				'rematched': me.subsession.rematched,
+				'continue': me.subsession.round_number > 1,
+				'round_number': me.subsession.round_number,
+				'my_CC_payoff': self.subsession.CC_payoff if me.id_in_group==1 else 0,
+				'other_CC_payoff': self.subsession.CC_payoff if me.id_in_group==2 else 0,
+				'my_DD_payoff': self.subsession.DD_payoff if me.id_in_group==2 else 0,
+				'other_DD_payoff': self.subsession.DD_payoff if me.id_in_group==1 else 0
+			}
+
 
 
 class ResultsWaitPage(WaitPage):

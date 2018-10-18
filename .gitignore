@@ -212,3 +212,6 @@ __temp_static_root/staticfiles.json
 __pycache__/settings.cpython-36.pyc
 log.log
 secret_key.txt
+*.dump
+*.1
+*.2

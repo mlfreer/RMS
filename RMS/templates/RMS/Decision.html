@@ -38,11 +38,12 @@ continue with the <span class="other_payoff"> same player </span> as in the prev
 <br>
 <br> 
 
+{% if subsession.treatment == '2PPD' %}
     <div class="form-group required">
         <table class="table table-bordered text-center" style="width: auto; margin: auto">
             <tr>
                 <th colspan="2" rowspan="2"></th>
-                <th colspan="2"> <span class="other_payoff">Other's Choice</span></th>
+                <th colspan="2"><span class="other_payoff"> Other's Choice</span></th>
             </tr>
             <tr>
                 <th>A</th>
@@ -61,6 +62,31 @@ continue with the <span class="other_payoff"> same player </span> as in the prev
             </tr>
         </table>
     </div>
+{% else %}
+    <div class="form-group required">
+        <table class="table table-bordered text-center" style="width: auto; margin: auto">
+            <tr>
+                <th colspan="2" rowspan="2"></th>
+                <th colspan="2"><span class="other_payoff"> Other's Choice</span></th>
+            </tr>
+            <tr>
+                <th>A</th>
+                <th>B</th>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th class="rotate" rowspan="2" ><div class="own_payoff">Your Choice</div></th>
+                <td><button name="action" value="True" class="btn btn-primary btn-large">I will choose A</button></td>
+                <td><span class="own_payoff">{{my_CC_payoff}}</span>, <span class="other_payoff">{{other_CC_payoff}}</span></td>
+                <td><span class="own_payoff">0</span>, <span class="other_payoff">0</span></td>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <td><button name="action" value="False" class="btn btn-primary btn-large">I will choose B</button></td>
+                <td><span class="own_payoff">0</span>, <span class="other_payoff">0</span></td>
+                <td><span class="own_payoff">{{my_DD_payoff}}</span>, <span class="other_payoff">{{other_DD_payoff}}</span></td>
+            </tr>
+        </table>
+    </div>
+{% endif %}
 
 
 {% endblock %}
