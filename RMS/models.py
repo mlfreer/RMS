@@ -24,10 +24,10 @@ Experiment for 2 person infinitely repeated prisoners dilemma.
 class Constants(BaseConstants):
 	name_in_url = '2PCG'
 	players_per_group = 2
-	num_rounds = 160 # the total is 160 periods with random rematching at \delta = .8 (!!!)
+	num_rounds = 3 # the total is 160 periods with random rematching at \delta = .8 (!!!)
 	# set to 10 in the test mode, move to 160 in the real mode!
 
-	delta = .8 # continuation probability (in the same matching)
+	delta = .4 # continuation probability (in the same matching)
 
 class Subsession(BaseSubsession):
 	match_number = models.IntegerField(initial=1) # counting the mathes (to compute the payoffs in the end)
