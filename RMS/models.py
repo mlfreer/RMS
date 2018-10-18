@@ -22,12 +22,12 @@ Experiment for 2 person infinitely repeated prisoners dilemma.
 
 
 class Constants(BaseConstants):
-	name_in_url = '2PPD'
+	name_in_url = '2PCG'
 	players_per_group = 2
 	num_rounds = 160 # the total is 160 periods with random rematching at \delta = .8 (!!!)
 	# set to 10 in the test mode, move to 160 in the real mode!
 
-	delta = .4 # continuation probability (in the same matching)
+	delta = .8 # continuation probability (in the same matching)
 
 class Subsession(BaseSubsession):
 	match_number = models.IntegerField(initial=1) # counting the mathes (to compute the payoffs in the end)
@@ -73,23 +73,46 @@ class Player(BasePlayer):
 	# setting the payoff earned in the current round
 	def set_payoff_in_round(self):
 
-		payoff_matrix = {
-			1:
-				{
-					1: self.subsession.CC_payoff,
-					0: self.subsession.CD_payoff
-				},
-			0:
-				{
-					1: self.subsession.DC_payoff,
-					0: self.subsession.DD_payoff
-				}
-		}
 		if self.session.config['game_matrix'] == '2PPD':
+			payoff_matrix = {
+				1:
+					{
+						1: self.subsession.CC_payoff,
+						0: self.subsession.CD_payoff
+					},
+				0:
+					{
+						1: self.subsession.DC_payoff,
+						0: self.subsession.DD_payoff
+					}
+			}
 			self.payoff_in_round = payoff_matrix[self.action][self.other_player().action]
 		elif self.session.config['game_matrix'] == '2PCG':
-			if (self.id_in_group==1 and self.action==1) or (self.id_in_group==2 and self.action==0):
-				self.payoff_in_round = payoff_matrix[self.action][self.other_player().action]
+			payoff_matrix = {
+				1:
+					{
+						1: {
+							1:self.subsession.CC_payoff,
+							0:10,
+						},
+						0: {
+							1:self.subsession.CD_payoff,
+							0:self.subsession.CD_payoff
+						}
+					},
+				0:
+					{
+						1: {
+							1: self.subsession.DC_payoff,
+							0: self.subsession.DC_payoff,
+						},
+						0: {
+							1: 10,
+							0: self.subsession.DD_payoff
+						}
+					}
+			}
+			self.payoff_in_round = payoff_matrix[self.action][self.other_player().action][2-self.id_in_group]
 
 		if self.subsession.round_number>1:
 			self.total_payoff = self.in_round(self.subsession.round_number-1).total_payoff+self.payoff_in_round 

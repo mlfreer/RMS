@@ -24,10 +24,10 @@ class Welcome(Page):
 			return {
 				'prob' : Constants.delta*100,
 				'rounds': Constants.num_rounds,
-				'my_CC_payoff': self.subsession.CC_payoff if me.id_in_group==1 else 0,
-				'other_CC_payoff': self.subsession.CC_payoff if me.id_in_group==2 else 0,
-				'my_DD_payoff': self.subsession.DD_payoff if me.id_in_group==2 else 0,
-				'other_DD_payoff': self.subsession.DD_payoff if me.id_in_group==1 else 0
+				'my_CC_payoff': self.subsession.CC_payoff if me.id_in_group==1 else 10,
+				'other_CC_payoff': self.subsession.CC_payoff if me.id_in_group==2 else 10,
+				'my_DD_payoff': self.subsession.DD_payoff if me.id_in_group==2 else 10,
+				'other_DD_payoff': self.subsession.DD_payoff if me.id_in_group==1 else 10
 			}
 
 #class necessary to determine whether you are rematched
@@ -46,13 +46,13 @@ class ShuffleWaitPage(WaitPage):
 				#self.subsession.group_randomly() # shuffle groups
 
 				matrix = self.subsession.get_group_matrix()
-				print(matrix)
+				#print(matrix)
 				trans_matrix = list(map(list, zip(*matrix)))
 				for idx,row in enumerate(trans_matrix):
 					# we mutate in place since shuffle randomizes in place and returns none
 					random.shuffle(trans_matrix[idx])
 				matrix=list(map(list, zip(*trans_matrix)))
-				print(matrix)
+				#print(matrix)
 				self.subsession.set_group_matrix(matrix)
 
 
@@ -86,10 +86,10 @@ class Decision(Page):
 				'rematched': me.subsession.rematched,
 				'continue': me.subsession.round_number > 1,
 				'round_number': me.subsession.round_number,
-				'my_CC_payoff': self.subsession.CC_payoff if me.id_in_group==1 else 0,
-				'other_CC_payoff': self.subsession.CC_payoff if me.id_in_group==2 else 0,
-				'my_DD_payoff': self.subsession.DD_payoff if me.id_in_group==2 else 0,
-				'other_DD_payoff': self.subsession.DD_payoff if me.id_in_group==1 else 0
+				'my_CC_payoff': self.subsession.CC_payoff if me.id_in_group==1 else 10,
+				'other_CC_payoff': self.subsession.CC_payoff if me.id_in_group==2 else 10,
+				'my_DD_payoff': self.subsession.DD_payoff if me.id_in_group==2 else 10,
+				'other_DD_payoff': self.subsession.DD_payoff if me.id_in_group==1 else 10
 			}
 
 

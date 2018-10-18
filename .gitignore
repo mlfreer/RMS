@@ -215,3 +215,5 @@ secret_key.txt
 *.dump
 *.1
 *.2
+*.pyc
+RMS/__pycache__/models.cpython-36.pyc
